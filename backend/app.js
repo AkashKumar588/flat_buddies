@@ -1,5 +1,4 @@
 import express from "express";
-
 import cors from "cors";
 import authRoutes from "./routes/user_routes/auth_route.js";
 import userDetailRoutes from "./routes/user_routes/detailRoutes.js";
@@ -13,33 +12,26 @@ import flatOwnerroutes from "./routes/user_routes/flatOwner_routes.js";
 import flatmateOwnerRoutes from "./routes/user_routes/flatMateOwner_routes.js";
 
 const app = express();
-app.use(cors());
+const PORT = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
 
+// Root route - ye add karna zaroori hai
+app.get("/", (req, res) => {
+  res.send("Backend is running successfully");
+});
+
 app.use("/api/user/auth", authRoutes);
-
 app.use("/api/user/userdata", UserMiddleware, userDetailRoutes);
-
 app.use("/api/user/registerflat", UserMiddleware, flatRoutes);
-
 app.use("/api/user/registerflatMate", UserMiddleware, flatMateRoutes);
-
 app.use("/api/user/getFlats", flatsRoutes);
-
 app.use("/api/user/getFlatmates", flatmatesRoutes);
-
 app.use("/api/user", UserMiddleware, mailRoutes);
 app.use("/api/user/flat", UserMiddleware, flatOwnerroutes);
 app.use("/api/user/flatmate", UserMiddleware, flatmateOwnerRoutes);
 
-const express = require("express");
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.get("/", (req, res) => {
-  res.send("Backend is running successfully");
-});
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
