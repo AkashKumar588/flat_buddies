@@ -33,9 +33,11 @@ app.use("/api/user", UserMiddleware, mailRoutes);
 app.use("/api/user/flat", UserMiddleware, flatOwnerroutes);
 app.use("/api/user/flatmate", UserMiddleware, flatmateOwnerRoutes);
 
+const PORT = process.env.PORT || 3000;
+
 app.get("/", (req, res) => {
   res.send("Backend is running successfully");
 });
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
