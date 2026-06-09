@@ -12,7 +12,6 @@ RUN npm install
 COPY . .
 
 # Generate Prisma client (if using Prisma)
-RUN npx prisma generate
 
 # Expose your backend port (e.g., 3000)
 EXPOSE 3000
